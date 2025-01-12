@@ -112,8 +112,11 @@ function canQueenCaptureKing(queen, king) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a === b && a + b > c) return true;
+  if (a === c && a + c > b && b !== 0) return true;
+  if (b === c && b + c > a) return true;
+  return false;
 }
 
 /**
@@ -130,8 +133,28 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const hm = new Map([
+    [1, 'I'],
+    [2, 'II'],
+    [3, 'III'],
+    [4, 'IV'],
+    [5, 'V'],
+    [6, 'VI'],
+    [7, 'VII'],
+    [8, 'VIII'],
+    [9, 'IX'],
+    [10, 'X'],
+  ]);
+  let result = '';
+  let tens = parseInt(num / 10, 10);
+  while (tens > 0) {
+    result += hm.get(10);
+    tens -= 1;
+  }
+  const diff = num % 10;
+  if (diff !== 0) result += hm.get(diff);
+  return result;
 }
 
 /**
@@ -149,8 +172,29 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const hm = new Map([
+    ['0', 'zero'],
+    ['1', 'one'],
+    ['2', 'two'],
+    ['3', 'three'],
+    ['4', 'four'],
+    ['5', 'five'],
+    ['6', 'six'],
+    ['7', 'seven'],
+    ['8', 'eight'],
+    ['9', 'nine'],
+    ['10', 'ten'],
+    [',', 'point'],
+    ['.', 'point'],
+    ['-', 'minus'],
+  ]);
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    result += hm.get(numberStr[i]);
+    if (i !== numberStr.length - 1) result += ' ';
+  }
+  return result;
 }
 
 /**
